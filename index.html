@@ -7,11 +7,9 @@
 <h1>Matchmaker</h1>
 <p>Find your true love today!!!</p>
 
-<label>
-  Lewis men's volleyball Rocks!!
-</label>
-<br> 
 
+<label>Lewis men's volleyball Rocks!!</label>
+<br> 
 
 <select id="q1">
   <option value="5">Strongly Agree</option>
@@ -23,15 +21,89 @@
 
 <br><br>
 
-<button onclick="calculateLove()">
-  Calculate Love
-</button>
+<label>Chocolate chip cookies are the best! </label>
+<br> 
+
+<select id="q2">
+  <option value="5">Strongly Agree</option>
+  <option value="4">Agree</option>
+  <option value="3">Neutral</option>
+  <option value="2">Disagree</option>
+  <option value="1">Strongly Disagree</option>
+</select>
+
+<br><br>
+
+<label>Dogs are the best pets! </label>
+<br> 
+
+<select id="q3">
+  <option value="5">Strongly Agree</option>
+  <option value="4">Agree</option>
+  <option value="3">Neutral</option>
+  <option value="2">Disagree</option>
+  <option value="1">Strongly Disagree</option>
+</select>
+
+<br><br>
+
+<label> </label>
+<br> 
+
+<select id="q4">
+  <option value="5">Strongly Agree</option>
+  <option value="4">Agree</option>
+  <option value="3">Neutral</option>
+  <option value="2">Disagree</option>
+  <option value="1">Strongly Disagree</option>
+</select>
+
+<br><br>
+
+<label>
+  Chocolate chip cookies are the best! 
+</label>
+<br> 
+
+<select id="q5">
+  <option value="5">Strongly Agree</option>
+  <option value="4">Agree</option>
+  <option value="3">Neutral</option>
+  <option value="2">Disagree</option>
+  <option value="1">Strongly Disagree</option>
+</select>
+
+<br><br>
+
+<button onclick="calculateCompatibility()">Calculate Love</button>
+<p id="compatibility"></p>
 
 <script>
-  console.log('starting...')
+  console.log('starting Matchmaker...');
 
-  function calculateLove() {
-    console.log('calculate love')
+  function calculateCompatibility() {
+    const preferredAnswers = [5, 5, 5]; 
+    console.log('calculating compatibility');
+    const userAnswers = [];
+    userAnswers.push(document.getElementById('q1').selectedOptions[0].value);
+    userAnswers.push(document.getElementById('q2').selectedOptions[0].value);
+    userAnswers.push(document.getElementById('q3').selectedOptions[0].value);
+    
+    console.log(userAnswers);
+
+    let totalCompatibility = 0;
+
+    for (let i = 0; i < userAnswers.length; i++) {
+     const userAnswersInt = parseInt(userAnswers[i]);
+      let questionCompatibility = 5 - Math.abs(userAnswersInt - preferredAnswers[i]);
+      totalCompatibility += questionCompatibility;
+    }
+
+    console.log(totalCompatibility)
+
+    document.getElementById("compatibility").innerHTML = "Your compatibility is: " + totalCompatibility;
+
+    
   }
 </script>
 
