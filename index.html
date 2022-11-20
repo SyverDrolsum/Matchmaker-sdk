@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Matchmaker</title>
+<title>Matchmaker 2022</title>
 </head>
 <body>
-<h1>Matchmaker</h1>
-<p>Find your true love today!!!</p>
+<h1>Matchmaker 2022</h1>
+<p>Welcome to Matchmaker. <br> You just have to answer a few questions. <br> Based on your answers, the program figures out your compatibility with the host.</p>
 
 
 <label>Lewis men's volleyball Rocks!!</label>
@@ -21,7 +21,7 @@
 
 <br><br>
 
-<label>Chocolate chip cookies are the best! </label>
+<label>Cars are coooooool! </label>
 <br> 
 
 <select id="q2">
@@ -34,7 +34,7 @@
 
 <br><br>
 
-<label>Dogs are the best pets! </label>
+<label>Goldfish are the most entertaining pets.</label>
 <br> 
 
 <select id="q3">
@@ -47,7 +47,9 @@
 
 <br><br>
 
-<label> </label>
+<label>
+  Sweden is in the worst 10% of countries (Sweden sucks).   
+</label>
 <br> 
 
 <select id="q4">
@@ -61,7 +63,7 @@
 <br><br>
 
 <label>
-  Chocolate chip cookies are the best! 
+  Nike shoes are good.
 </label>
 <br> 
 
@@ -78,34 +80,67 @@
 <button onclick="calculateCompatibility()">Calculate Love</button>
 <p id="compatibility"></p>
 
+<p id="decision"></p>
+
 <script>
   console.log('starting Matchmaker...');
 
   function calculateCompatibility() {
-    const preferredAnswers = [5, 5, 5]; 
+
+    //Get the desired responses 
+    const preferredAnswers = [5, 3, 1, 5, 4]; 
+
+  
+    const MAX_SCORE = 25; 
+
     console.log('calculating compatibility');
     const userAnswers = [];
     userAnswers.push(document.getElementById('q1').selectedOptions[0].value);
     userAnswers.push(document.getElementById('q2').selectedOptions[0].value);
     userAnswers.push(document.getElementById('q3').selectedOptions[0].value);
+    userAnswers.push(document.getElementById('q4').selectedOptions[0].value);
+    userAnswers.push(document.getElementById('q5').selectedOptions[0].value);
     
     console.log(userAnswers);
 
     let totalCompatibility = 0;
 
+
+    //Calculate the total compatibility
     for (let i = 0; i < userAnswers.length; i++) {
      const userAnswersInt = parseInt(userAnswers[i]);
       let questionCompatibility = 5 - Math.abs(userAnswersInt - preferredAnswers[i]);
       totalCompatibility += questionCompatibility;
     }
 
-    console.log(totalCompatibility)
 
+// Convert totalCompatibility to a percentage.
+totalCompatibility *= 100 / MAX_SCORE;
+
+// Displays total compatibility
     document.getElementById("compatibility").innerHTML = "Your compatibility is: " + totalCompatibility;
 
-    
+//Displays interesting closing remark based on predetermined compatibility ranges 
+let greeting;
+if (totalCompatibility > 90) {
+  greeting = "Wanna get married?";
+} else if (totalCompatibility < 50 ) {
+  greeting = "I have a boyfriend";
+} else {
+  greeting = "Friends?";
+}
+document.getElementById("decision").innerHTML = greeting;
   }
 </script>
 
 </body>
+
+
+<style>
+
+body {
+text-align: center;
+}
+
+</style>
 </html>
